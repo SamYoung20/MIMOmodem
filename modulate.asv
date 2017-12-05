@@ -6,15 +6,11 @@ function signal = modulate(symbols, symbolrate, carrierFreq, samplerate)
   symbolsResampled = reshape(m,[1, signalLen]);
   
   
-  h = rcosdesign(0.25, length(symbols) ,samplesPerSymbol, 'normal');
-  shapedPulses = conv(symbolsResampled, h, 'same');
-  
-  stem(shapedPulses)
-  
+  h = rcosdesign(0.25, lengt ,4);
   
   time = length(symbols)/symbolrate;
   t = linspace(0,time,signalLen);
   
   carrier = cos(carrierFreq*2*pi*t);
-  signal = carrier.*shapedPulses;
+  signal = carrier.*symbolsResampled;
 end
