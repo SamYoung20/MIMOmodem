@@ -12,7 +12,7 @@ t = (0:N-1)/Fs;              % time vector
 
 % Design a 70th order lowpass FIR filter with cutoff frequency of 75 Hz.
 
-Fnorm = 200/(Fs/2);           % Normalized frequency
+Fnorm = 150/(Fs/2);           % Normalized frequency
 df = designfilt('highpassfir','FilterOrder',600,'CutoffFrequency',Fnorm);
 s1=filter(df,s1)
 s2=filter(df,s2)

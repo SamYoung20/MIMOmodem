@@ -1,0 +1,30 @@
+function y = demodulate2(signal, carrierFreq, samplerate)
+    signalLen = length(signal);
+    signalTime = signalLen/samplerate;
+    
+    t = linspace(0,signalTime,signalLen);
+    xt = data;
+y1 = [];
+y2 = [];
+y3 = [];
+w = 440;
+sampleRate = 44000;
+omc = (w*2*pi./sampleRate)*.7;
+n = linspace(-2000,2000,3000);
+h = omc/pi*sinc(omc*n/pi);
+y1 = xt.*cos(w.*t.');
+y2 = xt.*sin(w*t.');
+yc = 3.3333*conv(y1, h,'same');
+ys = 3.3333*conv(y2, h, 'same');
+z = yc+i*ys;
+a = fftshift(fft(z.^2));
+fs  = linspace(-pi, pi*(length(a)-1)/length(a), length(a));
+clf
+[tmp, ii] = max(abs(a));
+wdelta = fs(ii)
+theta = angle(a(ii))/2
+remod = cos(2*pi*w.*t.'-wdelta.*t.'-theta).*xt;
+
+demodulated = 3.33*conv(remod,h, 'same');
+
+end
