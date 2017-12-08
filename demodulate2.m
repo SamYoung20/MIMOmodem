@@ -1,4 +1,4 @@
-function y = demodulate(signal, carrierFreq, samplerate)
+function y = demodulate2(signal, carrierFreq, samplerate)
     signalLen = length(signal);
     signalTime = signalLen/samplerate;
     
