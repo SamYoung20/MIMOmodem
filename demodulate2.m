@@ -3,22 +3,24 @@ function y = demodulate2(signal, carrierFreq, samplerate)
     signalTime = signalLen/samplerate;
     
     t = linspace(0,signalTime,signalLen);
-    avWind = (100/carrierFreq)/(1/samplerate);
-    phi = 0;
-    y1 = 0;
-    avWind
-    for k = (avWind+1):avWind:length(signal)
-        disp('hi')
-        yt1 = cos(carrierFreq*t + phi).*signal';
-        y1 = mean(yt1(k-avWind:k));
-        yt2 = -sin(carrierFreq*t + phi).*signal';
-        y2 = mean(yt2(k-avWind:k));
-        phi = 4*y1*y2 + phi;
-    end
-    y_raw = signal.*cos(carrierFreq*t + phi)';
-    wc = .5*(carrierFreq * 2* pi)/samplerate;
-    n = linspace(-1000,1000,2000);
-    h = wc/pi * sinc(wc*n/pi);
-    y = conv(y_raw', h, 'same');
+    y1 = [];
+    y2 = [];
+    omc = (carrierFreq*2*pi./samplerate)*.7;
+    n = linspace(-2000,2000,3000);
+    h = omc/pi*sinc(omc*n/pi);
+    y1 = signal.*cos(carrierFreq.*t.');
+    y2 = signal.*sin(carrierFreq*t.');
+    yc = 3.3333*conv(y1, h,'same');
+    ys = 3.3333*conv(y2, h, 'same');
+    z = yc+i*ys;
+    a = fftshift(fft(z.^2));
+    fs  = linspace(-pi, pi*(length(a)-1)/length(a), length(a));
+    clf
+    [~, ii] = max(abs(a));
+    wdelta = fs(ii);        %drift in phase
+    theta = angle(a(ii))/2; %constant phase
+    remod = cos(2*pi*carrierFreq.*t.'-wdelta.*t.'-theta).*signal;
+
+    y = 3.33*conv(remod,h, 'same');
 
 end
