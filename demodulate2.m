@@ -5,7 +5,6 @@ function y = demodulate2(signal, carrierFreq, samplerate)
     t = linspace(0,signalTime,signalLen);
     y1 = [];
     y2 = [];
-    y3 = [];
     omc = (carrierFreq*2*pi./samplerate)*.7;
     n = linspace(-2000,2000,3000);
     h = omc/pi*sinc(omc*n/pi);
