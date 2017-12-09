@@ -1,4 +1,4 @@
-symbols = encode('!');
+%symbols = encode('!');
 symbols = [1 -1 1 -1 1 -1 1 -1 1];
 symbolRate = 10;
 sampleRate = 44000;
@@ -9,11 +9,11 @@ samplesPerSymbol = sampleRate/symbolRate;
 deltaT = length(symbols)/symbolRate;
 
 output = modulate(symbols, symbolRate, carrierFreq, sampleRate,'rcos');
-padding = modulate(1,1,100,44000,'square');
+padding = modulate(1,1,200,44000,'square');
 tone = [padding output];
 
 pause(1)
-sound(tone, sampleRate)
+soundsc(tone, sampleRate)
 
 received = demodulate(output, carrierFreq, sampleRate);
 
