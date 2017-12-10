@@ -19,6 +19,8 @@ function y = demodulate2(signal, carrierFreq, samplerate)
     [~, ii] = max(abs(a));
     wdelta = fs(ii);        %drift in phase
     theta = angle(a(ii))/2; %constant phase
+    
+    %%------%%%%% everything above this is also for mimo
     remod = cos(2*pi*carrierFreq.*t.'-wdelta.*t.'-theta).*signal;
 
     y = 3.33*conv(remod,h, 'same');
