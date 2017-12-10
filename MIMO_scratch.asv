@@ -6,9 +6,10 @@
 %known signal, noise
 % cross correlate each line
 freq = 440;
-Fs = 44000; % sample rate in Hz
+Fs = 48000; % sample rate in Hz
 period = 1/ freq; % time
 %%%Step 1: Line 11 Correlation
+line11 = Mi
 [h11acor,lag11] = xcorr(line11,knownSig);
 [~,I] = max(abs(h11acor));
 lagDiffh11 = lag11(I);
@@ -44,13 +45,4 @@ phaseShift22 = 2*pi*(mod(timeDiff22,period)/period);
 corrh22 = max(abs(h22acor))
 h22 = corh22+i*phaseShift22;
 
-hh1 = xcorr(line11, knownSig)
 H = [h11 h12; h21 h22];
-[U,S,V] = svd(H);
-dk = [d1(k);d2(k)];
-xk = V*dk;
-transmission = xk*cos(w*t+wdelta*t+theta);
-
-%-------------------Reciever----------------------------------------------%
-yk = recieved*cos(w*t+wdelta*t+theta);  %matrix of recieved values with 2 columns or rows or whatever of the two mics
-wk = U'*yk; %scaled dk

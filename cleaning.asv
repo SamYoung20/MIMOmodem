@@ -1,0 +1,6 @@
+micOne = y;
+micTwo = y;
+micOne(74000:264000,:) = 0;
+plot(micOne)
+micTwo(74000:264000,:) = 0;
+plot(micOne)

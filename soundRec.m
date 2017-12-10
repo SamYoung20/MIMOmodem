@@ -1,6 +1,6 @@
-recObj = audiorecorder(44000,8,2)
+recObj = audiorecorder(48000,8,2)
 disp('Start speaking.')
-recordblocking(recObj, 4);
+recordblocking(recObj, 6);
 disp('End of Recording.');
 play(recObj);
 y = getaudiodata(recObj);

@@ -6,16 +6,19 @@
 %known signal, noise
 % cross correlate each line
 freq = 440;
-Fs = 44000; % sample rate in Hz
+Fs = 48000; % sample rate in Hz
 period = 1/ freq; % time
 %%%Step 1: Line 11 Correlation
+line11 = micOne(:,1);
+knownSig = testSound;
 [h11acor,lag11] = xcorr(line11,knownSig);
 [~,I] = max(abs(h11acor));
 lagDiffh11 = lag11(I);
-timeDiff11 = lagDiffh11/Fs;
+timeDiffh11 = lagDiffh11/Fs;
 phaseShift11 = 2*pi* ((mod(timeDiffh11, period))/period);
-corrh11 = max(abs(h11acor));
-h11 = corh11+i*phaseShift11;
+plot(lag11,h11acor)
+corrh11 = max(abs(h11acor))/(48000^2)
+h11 = corrh11+i*phaseShift11;
 
 %%%Step 2 : Line 12 Correlation
 [h12acor,lag12] = xcorr(line12, line11);
