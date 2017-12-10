@@ -9,6 +9,7 @@ function H = findH(mic1,mic2,noise,Fs,deltaT,w)
   subplot(4,1,3)
   plot(mic1Cor);
   noiseLen = length(noise);
+  noiseTime = noiseLen/Fs;
   
   [mic1Cor1, mic1Index1] = max(mic1Cor);
   mic1Cor(mic1Index1-round(noiseLen/8):mic1Index1+round(noiseLen/8)) = 0;
@@ -40,7 +41,9 @@ function H = findH(mic1,mic2,noise,Fs,deltaT,w)
   time22 = mic2Lag(mic2Index2)/Fs;
   
   gains = [mic1Cor1 mic1Cor2; mic2Cor1, mic2Cor2];
-  timeOffsets = [0, time21-time11-deltaT; time12-time11, time22-time11-deltaT];
+  gains
+  timeOffsets = [0, time21-time11-deltaT-noiseTime; time12-time11, time22-time11-deltaT-noiseTime];
+  timeOffsets
   phaseOffsets = mod(timeOffsets, period)/period*2*pi;
   H = gains.*exp(i*phaseOffsets);
 end
