@@ -1,0 +1,16 @@
+carrierFreq = 440;
+samplerate = 48000;
+recObj = audiorecorder(samplerate,8,2);
+disp('Start speaking.')
+recordblocking(recObj, 8);
+disp('End of Recording.');
+raw = getaudiodata(recObj);
+[cor,lag] = xcorr(raw,noise,'coeff');
+[Cor1, Index1] = max(cor);
+lagNum = lag(index1) +Fs; 
+trim =raw(lagNum:, :
+H = h;
+[U, S, V] =svd(H);
+signal = U'*raw';
+y1 = demodulate(signal(1,:).', carrierFreq, samplerate);
+y2 = demodulate1(signal(2,:).', carrierFreq, samplerate);

@@ -1,0 +1,9 @@
+[cor,lag] = xcorr(raw(:,1),testSound,);
+[Cor1, Index1] = max(cor);
+lagNum = lag(index1) +Fs; 
+trim =raw(lagNum:384000, :)
+H = h;
+[U, S, V] =svd(H);
+signal = U'*trim';
+y1 = demodulate(signal(1,:).', carrierFreq, samplerate);
+y2 = demodulate1(signal(2,:).', carrierFreq, samplerate);
