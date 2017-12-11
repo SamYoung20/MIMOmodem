@@ -52,7 +52,7 @@ function H = findH(mic1,mic2,noise,Fs,deltaT,w)
   
   
   %gains = [mic1Cor1 mic1Cor2; mic2Cor1, mic2Cor2]
-  gains = [gain11 gain21; gain12, gain22]
+  gains = [gain11 gain21; gain12, gain22];
   timeOffsets = [0, time21-time11-deltaT-noiseTime; time12-time11, time22-time11-deltaT-noiseTime];
   phaseOffsets = mod(timeOffsets, period)/period*2*pi;
   H = gains.*exp(i*phaseOffsets);

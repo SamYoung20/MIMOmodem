@@ -4,6 +4,6 @@ load noise.mat
 tone = testSound;
 z    = zeros(1, length(tone));
 delay = zeros(1,48000/2);
-totalTest = [z delay tone; tone delay z];
-sound(totalTest,48000);
+totalTest = [tone delay z; z delay tone];
+soundsc(totalTest,48000);
 %plot(real(fftshift(fft(tone))))

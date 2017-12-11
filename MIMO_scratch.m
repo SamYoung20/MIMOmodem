@@ -11,14 +11,14 @@ signalLen = 1; %time of the noise signal
 fullMic1 = micTwo(:,2);
 fullMic2 = micTwo(:,1);
 
-%load hMatrix.mat
-findH(fullMic1,fullMic2,testSound,Fs,deltaT,freq)
+load hMatrix2.mat
+%findH(fullMic1,fullMic2,testSound,Fs,deltaT,freq)
 
-signals = [1 -1 1 -1;-1 1 -1 1];
+signals = [encode('hello'); encode('world')];
 
 z = zeros(1, length(testSound));
 xcorHook = [z;testSound];
 
-%sound = MIMO_transmit(signals,1,H,freq,Fs);
-%totalTone = [xcorHook*20 sound];
-%soundsc(totalTone, Fs);
+%sound = MIMO_transmit(signals,8,h,freq,Fs);
+totalTone = [xcorHook*20 sound];
+soundsc(totalTone, Fs);
