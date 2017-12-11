@@ -16,7 +16,7 @@ function signal = modulate(symbols, symbolrate, carrierFreq, samplerate, type)
   time = length(symbols)/symbolrate;
   t = linspace(0,time,signalLen);
   
-  carrier = cos(carrierFreq*2*pi*t);
+  carrier = exp(i*carrierFreq*2*pi*t);
   
   %change shapedPulses to symbolResampled to not use the RCF
   if(strncmp(type,'rcos',4))
